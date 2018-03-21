@@ -148,33 +148,9 @@ var sliceWidth = (canvas.width/2 - sideoffset*2) / bufferLength;
 
 // var arr400 = [];
 
-function paint(){
+function freqWings() {
 	
-	canvasCtx.fillStyle = 'rgb(20, 20, 40)';
-	canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-	// start plotting frequencies
-	canvasCtx.lineWidth = Math.floor(sliceWidth - 1);
-	rightX = canvas.width / 2;
-	leftX = rightX;
-	
-	//plot central bass squares
-	canvasCtx.save()
-	
-	canvasCtx.translate(centerX, centerY);
-	canvasCtx.lineWidth = 4;
-	canvasCtx.strokeStyle = "#a63716";
-	
-	canvasCtx.rotate((Math.PI / 180) * 45); // rotate
-	canvasCtx.rect(0, 0, dataArray[bass], dataArray[bass]);
-	canvasCtx.stroke();
-	
-	canvasCtx.rotate((Math.PI / 180) * 180); // rotate
-	canvasCtx.rect(0, 0, dataArray[bass], dataArray[bass]);
-	canvasCtx.stroke();
-		
-	canvasCtx.restore();
-
-	//side "arrows"
+//side "arrows"
 	for (var i = 0; i < bufferLength; i++){
 		
 		//upper right portion 
@@ -211,6 +187,37 @@ function paint(){
 		rightX += sliceWidth;
 		leftX -= sliceWidth;
 	}
+}
+
+function paint(){
+	
+	//clear
+	canvasCtx.fillStyle = 'rgb(20, 20, 40)';
+	canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+	// start plotting frequencies
+	canvasCtx.lineWidth = Math.floor(sliceWidth - 1);
+	rightX = canvas.width / 2;
+	leftX = rightX;
+	
+	//plot central bass squares
+	canvasCtx.save()
+	
+	canvasCtx.translate(centerX, centerY);
+	canvasCtx.lineWidth = 4;
+	canvasCtx.strokeStyle = "#a63716";
+	
+	canvasCtx.rotate((Math.PI / 180) * 45); // rotate
+	canvasCtx.rect(0, 0, dataArray[bass], dataArray[bass]);
+	canvasCtx.stroke();
+	
+	canvasCtx.rotate((Math.PI / 180) * 180); // rotate
+	canvasCtx.rect(0, 0, dataArray[bass], dataArray[bass]);
+	canvasCtx.stroke();
+		
+	canvasCtx.restore();
+	
+	// lateral arrows 
+	freqWings();
 }
 
 /* ------------------------------
